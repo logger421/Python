@@ -1,0 +1,1 @@
+# dopytać się o treść zadania
