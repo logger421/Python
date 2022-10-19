@@ -5,4 +5,4 @@ def convert_to_string(l):
 L = list(range(10))
 
 if __name__ == '__main__':
-    print(convert_to_string(L))
+    assert convert_to_string(L) == '0123456789'

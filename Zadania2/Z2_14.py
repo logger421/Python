@@ -12,5 +12,5 @@ line = """Lorem Ipsum
     industry."""
 
 if __name__ == '__main__':
-    print("The biggest word in\n" + line + "is: " + str(find_biggest_word(line)))
-    print("Length of the biggest word in" + line + "equals: " + str(find_biggest_word_len(line)))
+    print(f"The biggest word in given text is: '{str(find_biggest_word(line))}'")
+    print("Length of the biggest word in given text equals: " + str(find_biggest_word_len(line)))

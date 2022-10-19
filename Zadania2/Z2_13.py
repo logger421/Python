@@ -6,4 +6,5 @@ line = """Lorem Ipsum
     the printing and typesetting 
     industry."""
 
-print(len_of_words(line))
+if __name__ == '__main__':
+    assert len_of_words(line) == 63
