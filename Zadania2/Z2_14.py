@@ -1,6 +1,7 @@
 def find_biggest_word(x):
     return max(x.split())
 
+
 def find_biggest_word_len(x):
     return len(max(x.split()))
 
