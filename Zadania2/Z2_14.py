@@ -1,9 +1,9 @@
 def find_biggest_word(x):
-    return max(x.split())
+    return max(x.split(), key=len)
 
 
 def find_biggest_word_len(x):
-    return len(max(x.split()))
+    return len(find_biggest_word(x))
 
 
 line = """Lorem Ipsum 
