@@ -8,6 +8,7 @@ def print_measure(x):
         s += "{:<5}".format(n)
     return s
 
+
 # Zadanie 3.6
 def print_rectangle(y, x):
     s = ""
@@ -17,24 +18,25 @@ def print_rectangle(y, x):
         if row == 0:
             for col in rect_len:
                 s += "+---"
-                if col == len(rect_len) -1: s += "+"
+                if col == len(rect_len) - 1: s += "+"
             s += "\n"
 
         for col in rect_len:
             s += "|   "
-            if col == len(rect_len) -1: s += "|"
+            if col == len(rect_len) - 1: s += "|"
         s += "\n"
 
         for col in rect_len:
             s += "+---"
-            if col == len(rect_len) -1: s += "+"
+            if col == len(rect_len) - 1: s += "+"
         s += "\n"
     print(s)
 
+
 if __name__ == '__main__':
     # 3.5
-    x = int(input("Enter length for your measure: "))
-    print(print_measure(x))
+    print(print_measure(8))
+
     # 3.6
-    (y, x) = input("Podaj wymiary prostokąta (HeightxLength):").split("x")
-    print_rectangle(int(y), int(x))
+    print("\n")
+    print_rectangle(4, 5)

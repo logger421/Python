@@ -5,7 +5,7 @@ def fibonnaci(n):
     i = 2
     result = 0
     while i <= n:
-        result = n0+n1
+        result = n0 + n1
         n0 = n1
         n1 = result
         i += 1

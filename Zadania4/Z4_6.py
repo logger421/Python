@@ -7,6 +7,6 @@ def sum_seq(sequence):
             sum += el
     return sum
 
+
 if __name__ == "__main__":
     print(sum_seq([1, 2, [3, 4], [5, 6], (7, 8, 9)]))
-

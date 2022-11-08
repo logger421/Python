@@ -19,7 +19,8 @@ def factorial2(n):
         return 1
     if n < 0:
         raise ValueError("Factorial cannot be calculated on negative numbers!")
-    return reduce((lambda x,y: x*y), range(1, n+1))
+    return reduce((lambda x, y: x * y), range(1, n + 1))
+
 
 if __name__ == '__main__':
     assert factorial(0) == 1

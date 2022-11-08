@@ -1,6 +1,13 @@
 def odwracanie(L, left, right):
-    P = L[left:right].reverse()
-    print(P)
+    while left != right:
+        cp = L[right]
+        L[right] = L[left]
+        L[left] = cp
+        left += 1
+        right -= 1
+    return L
+
 
 if __name__ == '__main__':
-    odwracanie([1,2,3,4], 0, 3)
+    L = [1, 2, 3, 4]
+    print(odwracanie(L, 0, 3))
