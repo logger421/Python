@@ -1,13 +1,25 @@
 def add_frac(frac1, frac2):
     if frac1[1] != frac2[1]:
-        return [frac1[0] * frac2[1] + frac2[0] * frac1[1], nww(frac1[1], frac2[1])]
+        m = nww(frac1[1], frac2[1])
+        if frac1[1] != m and frac2[1] == m:
+            return [frac1[0] * (m/frac1[1]) + frac2[0], m]
+        elif frac1[1] == m and frac2[1] != m:
+            return [frac1[0] + frac2[0] * (m/frac2[1]), m]
+        else:
+            return [frac1[0] * (m/frac1[1]) + frac2[0] * (m/frac2[1]), m]
     else:
         return [frac1[0] + frac2[0], frac1[1]]
 
 
 def sub_frac(frac1, frac2):
     if frac1[1] != frac2[1]:
-        return [frac1[0] * frac2[1] - frac2[0] * frac1[1], nww(frac1[1], frac2[1])]
+        m = nww(frac1[1], frac2[1])
+        if frac1[1] != m and frac2[1] == m:
+            return [frac1[0] * (m/frac1[1]) - frac2[0], m]
+        elif frac1[1] == m and frac2[1] != m:
+            return [frac1[0] - frac2[0] * (m/frac2[1]), m]
+        else:
+            return [frac1[0] * (m/frac1[1]) - frac2[0] * (m/frac2[1]), m]
     else:
         return [frac1[0] - frac2[0], frac1[1]]
 
@@ -37,10 +49,10 @@ def frac2float(frac):
 
 
 def nww(a, b):
-    if (a < b):
+    if a < b:
         return nww(b, a)
     k = a
-    while (k % b != 0):
+    while k % b != 0:
         k += a
     return k
 
@@ -63,9 +75,10 @@ class TestFractions(unittest.TestCase):
 
     def test_add_frac(self):
         self.assertEqual(add_frac([1, 2], [1, 3]), [5, 6])
+        self.assertEqual(add_frac([3, 4], [5, 6]), [19, 12])
 
-    def test_sub_frac(self): pass
-        # self.assertEqual([1, 4], sub_frac([1, 2], [1, 4]))
+    def test_sub_frac(self):
+        self.assertEqual([1, 4], sub_frac([1, 2], [1, 4]))
 
     def test_mul_frac(self):
         self.assertEqual([1, 8], mul_frac([1, 2], [1, 4]))
