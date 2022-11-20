@@ -51,9 +51,3 @@ class Point:
     def __hash__(self):
         """hash code"""
         return hash((self.x, self.y))  # bazujemy na tuple, immutable points
-
-if __name__ == '__main__':
-    p1 = Point(0, 0)
-    p2 = Point(0, 0)
-    print(p1.__hash__())
-    print(p2.__hash__())
