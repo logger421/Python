@@ -1,0 +1,326 @@
+## Wojciech Lotko
+
+### Zadania
+#### OBOWIĄZKOWE DO PRZESŁANIA: dwa dowolne zadania z zestawu, z wyjątkiem 6.1.
+
+### ZADANIE 6.1 (KLASA TIME)
+W pliku `times.py` zdefiniować klasę Time wraz z potrzebnymi metodami. Odcinek czasu jest określony przez liczbę sekund. Napisać kod testujący moduł times.
+
+```
+class Time:
+    """Klasa reprezentująca odcinek czasu."""
+
+    def __init__(self, s=0):
+        """Zwraca instancję klasy Time."""
+        if s < 0:
+            raise ValueError("ujemny czas")
+        self.s = int(s)
+
+    def __str__(self):
+        """Zwraca string 'hh:mm:ss'."""
+        h = self.s // 3600
+        sec = self.s - h * 3600
+        m = sec // 60
+        sec = sec - m * 60
+        return "{0:02d}:{1:02d}:{2:02d}".format(h, m, sec)
+
+    def __repr__(self):
+        """Zwraca string 'Time(s)'."""
+        return "Time({})".format(self.s)
+
+    def __add__(self, other):
+        """Dodawanie odcinków czasu."""
+        return Time(self.s + other.s)
+
+    #def __cmp__(self, other): # Py2, porównywanie, -1|0|+1
+    #    """Porównywanie odcinków czasu."""
+    #    return cmp(self.s, other.s)
+
+    # Py2.7 i Py3, rich comparisons.
+    def __eq__(self, other):
+        return self.s == other.s
+
+    def __ne__(self, other):
+        return self.s != other.s
+
+    def __lt__(self, other):
+        return self.s < other.s
+
+    def __le__(self, other):
+        return self.s <= other.s
+
+    # nadmiarowe
+    #def __gt__(self, other):
+    #    return self.s > other.s
+
+    # nadmiarowe
+    #def __ge__(self, other):
+    #    return self.s >= other.s
+
+    def __int__(self):                  # int(time1)
+        """Konwersja odcinka czasu do int."""
+        return self.s
+```
+`# Kod testujący moduł - dopisać co najmniej dwa testy do każdej sekcji.`
+
+```
+import unittest
+
+class TestTime(unittest.TestCase):
+
+    def setUp(self):
+        self.t1 = Time(3723)
+
+    def test_print(self): pass      # test str() i repr()
+        self.assertEqual(str(self.t1), "01:02:03")
+        self.assertEqual(repr(self.t1), "Time(3723)")
+
+    def test_cmp(self):
+        # Trzeba sprawdzać ==, !=, >, >=, <, <=.
+        self.assertTrue(Time(2) == Time(2))
+        self.assertFalse(Time(2) == Time(3))
+        self.assertTrue(Time(2) != Time(3))
+        self.assertFalse(Time(2) != Time(2))
+        self.assertTrue(Time(2) < Time(3))
+        self.assertFalse(Time(4) < Time(3))
+        self.assertTrue(Time(2) <= Time(3))
+        self.assertFalse(Time(4) <= Time(3))
+        self.assertTrue(Time(4) > Time(3))
+        self.assertFalse(Time(2) > Time(3))
+        self.assertTrue(Time(4) >= Time(3))
+        self.assertFalse(Time(2) >= Time(3))
+
+    def test_add(self):   # musi działać porównywanie
+        self.assertEqual(Time(1) + Time(2), Time(3))
+
+    def test_int(self): pass
+
+    def tearDown(self): pass
+
+if __name__ == "__main__":
+    unittest.main()     # wszystkie testy
+```
+
+### ZADANIE 6.2 (KLASA POINT)
+W pliku `points.py` zdefiniować klasę Point wraz z potrzebnymi metodami. Punkty są traktowane jak wektory zaczepione w początku układu współrzędnych, o końcu w położeniu (x, y). Napisać kod testujący moduł points.
+
+```
+class Point:
+    """Klasa reprezentująca punkty na płaszczyźnie."""
+
+    def __init__(self, x, y):  # konstuktor
+        self.x = x
+        self.y = y
+
+    def __str__(self): pass         # zwraca string "(x, y)"
+
+    def __repr__(self): pass        # zwraca string "Point(x, y)"
+
+    def __eq__(self, other): pass   # obsługa point1 == point2
+
+    def __ne__(self, other):        # obsługa point1 != point2
+        return not self == other
+
+    # Punkty jako wektory 2D.
+    def __add__(self, other): pass  # v1 + v2
+
+    def __sub__(self, other): pass  # v1 - v2
+
+    def __mul__(self, other): pass  # v1 * v2, iloczyn skalarny, zwraca liczbę
+
+    def cross(self, other):         # v1 x v2, iloczyn wektorowy 2D, zwraca liczbę
+        return self.x * other.y - self.y * other.x
+
+    def length(self): pass          # długość wektora
+
+    def __hash__(self):
+        return hash((self.x, self.y))   # bazujemy na tuple, immutable points
+```
+`# Kod testujący moduł.`
+```
+import unittest
+
+class TestPoint(unittest.TestCase): pass
+```
+### ZADANIE 6.3 (KLASA RECTANGLE)
+W pliku `rectangles.py` zdefiniować klasę Rectangle wraz z potrzebnymi metodami. Prostokąt jest określony przez podanie dwóch wierzchołków, lewego dolnego i prawego górnego. Napisać kod testujący moduł rectangles.
+```
+from points import Point
+
+class Rectangle:
+    """Klasa reprezentująca prostokąt na płaszczyźnie."""
+
+    def __init__(self, x1, y1, x2, y2):
+        self.pt1 = Point(x1, y1)
+        self.pt2 = Point(x2, y2)
+
+    def __str__(self): pass         # "[(x1, y1), (x2, y2)]"
+
+    def __repr__(self): pass        # "Rectangle(x1, y1, x2, y2)"
+
+    def __eq__(self, other): pass   # obsługa rect1 == rect2
+
+    def __ne__(self, other):        # obsługa rect1 != rect2
+        return not self == other
+
+    def center(self): pass          # zwraca środek prostokąta
+
+    def area(self): pass            # pole powierzchni
+
+    def move(self, x, y): pass      # przesunięcie o (x, y)
+```
+`# Kod testujący moduł.`
+```
+import unittest
+
+class TestRectangle(unittest.TestCase): pass
+```
+### ZADANIE 6.4 (KLASA TRIANGLE)
+W pliku `triangles.py` zdefiniować klasę Triangle wraz z potrzebnymi metodami. Trójkąt jest określony przez podanie trzech wierzchołków. Napisać kod testujący moduł triangles.
+```
+from points import Point
+
+class Triangle:
+    """Klasa reprezentująca trójkąt na płaszczyźnie."""
+
+    def __init__(self, x1, y1, x2, y2, x3, y3):
+        self.pt1 = Point(x1, y1)
+        self.pt2 = Point(x2, y2)
+        self.pt3 = Point(x3, y3)
+
+    def __str__(self): pass         # "[(x1, y1), (x2, y2), (x3, y3)]"
+
+    def __repr__(self): pass        # "Triangle(x1, y1, x2, y2, x3, y3)"
+
+    def __eq__(self, other): pass   # obsługa tr1 == tr2
+        # Trójkąty powinny być równe, jeżeli mają ten sam zbiór wierzchołków,
+        # niezależnie od kolejności pt1, pt2, pt3.
+
+    def __ne__(self, other):        # obsługa tr1 != tr2
+        return not self == other
+
+    def center(self): pass          # zwraca środek (masy) trójkąta
+
+    def area(self): pass            # pole powierzchni
+
+    def move(self, x, y): pass      # przesunięcie o (x, y)
+```
+`# Kod testujący moduł.`
+```
+import unittest
+
+class TestTriangle(unittest.TestCase): pass
+```
+### ZADANIE 6.5 (KLASA FRAC)
+W pliku `fracs.py` zdefiniować klasę Frac wraz z potrzebnymi metodami. Ułamek jest reprezentowany przez parę liczb całkowitych. Napisać kod testujący moduł fracs.
+```
+class Frac:
+    """Klasa reprezentująca ułamek."""
+
+    def __init__(self, x=0, y=1):
+        self.x = x
+        self.y = y
+
+    def __str__(self): pass         # zwraca "x/y" lub "x" dla y=1
+
+    def __repr__(self): pass        # zwraca "Frac(x, y)"
+
+    #def __cmp__(self, other): pass  # cmp(frac1, frac2)    # Py2
+
+    def __eq__(self, other): pass    # Py2.7 i Py3
+
+    def __ne__(self, other): pass
+
+    def __lt__(self, other): pass
+
+    def __le__(self, other): pass
+
+    #def __gt__(self, other): pass
+
+    #def __ge__(self, other): pass
+
+    def __add__(self, other): pass  # frac1 + frac2
+
+    def __sub__(self, other): pass  # frac1 - frac2
+
+    def __mul__(self, other): pass  # frac1 * frac2
+
+    def __div__(self, other): pass  # frac1 / frac2, Py2
+
+    def __truediv__(self, other): pass  # frac1 / frac2, Py3
+
+    def __floordiv__(self, other): pass  # frac1 // frac2, opcjonalnie
+
+    def __mod__(self, other): pass  # frac1 % frac2, opcjonalnie
+
+    # operatory jednoargumentowe
+    def __pos__(self):  # +frac = (+1)*frac
+        return self
+
+    def __neg__(self):  # -frac = (-1)*frac
+        return Frac(-self.x, self.y)
+
+    def __invert__(self):  # odwrotnosc: ~frac
+        return Frac(self.y, self.x)
+
+    def __float__(self): pass       # float(frac)
+
+    def __hash__(self):
+        return hash(float(self))   # immutable fracs
+        # w Pythonie set([2]) == set([2.0])
+        # chcemy set([2]) == set([Frac(2)])
+```
+`# Kod testujący moduł.`
+```
+import unittest
+
+class TestFrac(unittest.TestCase): pass
+```
+### ZADANIE 6.6 (KLASA POLY)
+W pliku `polys.py` zdefiniować klasę Poly wraz z potrzebnymi metodami. Wielomian będzie reprezentowany przez listę swoich współczynników, `[a0, a1, a2]` dla `a0 + a1 * x + a2 * x * x`. Wielomiany mogą mieć dowolnie wysoki stopień. Napisać kod testujący moduł polys.
+```
+class Poly:
+    """Klasa reprezentująca wielomiany."""
+
+    # wg Sedgewicka - tworzymy wielomian c*x^n
+    def __init__(self, c=0, n=0):
+        self.size = n + 1       # rozmiar tablicy
+        self.a = self.size * [0]
+        self.a[self.size-1] = c
+
+    def __str__(self):
+        return str(self.a)
+
+    def __add__(self, other): pass  # poly1 + poly2
+
+    def __sub__(self, other): pass  # poly1 - poly2
+
+    def __mul__(self, other): pass  # poly1 * poly2
+
+    def __pos__(self): pass         # +poly1 = (+1)*poly1
+
+    def __neg__(self): pass         # -poly1 = (-1)*poly1
+
+    def __eq__(self, other): pass   # obsługa poly1 == poly2
+
+    def __ne__(self, other):        # obsługa poly1 != poly2
+        return not self == other
+
+    def eval(self, x): pass         # schemat Hornera
+
+    def combine(self, other):       # złożenie poly1(poly2(x))
+
+    def __pow__(self, n): pass      # poly(x)**n lub pow(poly(x),n)
+
+    def diff(self): pass            # różniczkowanie
+
+    def integrate(self): pass       # całkowanie
+
+    def is_zero(self): pass         # bool, True dla [0], [0, 0],...
+```
+`# Kod testujący moduł.`
+```
+import unittest
+
+class TestPoly(unittest.TestCase): pass
+```
