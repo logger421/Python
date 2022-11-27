@@ -20,10 +20,7 @@ class Point:
 
     def __eq__(self, other) -> bool:
         """obsługa point1 == point2"""
-        if self.x == other.x and self.y == other.y:
-            return True
-        else:
-            return False
+        return self.x == other.x and self.y == other.y
 
     def __ne__(self, other) -> bool:
         """obsługa point1 != point2"""
