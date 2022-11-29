@@ -65,7 +65,7 @@ class Rectangle:
         return Rectangle(*find_min_xy(points), *find_max_xy(points))
 
     def make4(self) -> tuple:
-        '''zwraca krotkę czterech mniejszych'''
+        '''zwraca krotkę czterech mniejszyh'''
         center = self.center()
         r1 = Rectangle(self.pt1.x, self.pt1.y, center.x, center.y)
         r2 = Rectangle(center.x, self.pt1.y, self.pt2.x, center.y)
@@ -73,10 +73,3 @@ class Rectangle:
         r4 = Rectangle(center.x, center.y, self.pt2.x, self.pt2.y)
 
         return r1, r2, r3, r4
-
-
-if __name__ == '__main__':
-    r1 = Rectangle(0, 0, 1, 1)
-    r2 = Rectangle(0, 0, 2, 2)
-
-    print(r1.cover(r2))

@@ -36,6 +36,18 @@ class TestPoint(unittest.TestCase):
         self.r1.move(1, 1)
         self.assertTrue(self.r1 == Rectangle(1, 1, 2, 2))
 
+    def test_make4(self):
+        self.assertTupleEqual(Rectangle.make4(Rectangle(0,0,2,2)),
+                              (Rectangle(0, 0, 1, 1), Rectangle(1, 0, 2, 1),
+                               Rectangle(0, 1, 1, 2), Rectangle(1, 1, 2, 2)))
+
+    def test_cover(self):
+        self.assertEqual(Rectangle(0, 0, 1, 1).cover(Rectangle(0, 0, 2, 2)), Rectangle(0, 0, 2, 2))
+        self.assertEqual(Rectangle(0, 0, 1, 1).cover(Rectangle(0, 0, 2, 2)), Rectangle(0, 0, 2, 2))
+
+    def test_intersection(self):
+        self.assertEqual(Rectangle(0, 0, 2, 2).intersection(Rectangle(1, 1, 2, 2)), Rectangle(1, 1, 2, 2))
+
 
 if __name__ == '__main__':
     unittest.main()
