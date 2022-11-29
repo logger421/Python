@@ -37,7 +37,7 @@ class TestPoint(unittest.TestCase):
         self.assertTrue(self.r1 == Rectangle(1, 1, 2, 2))
 
     def test_make4(self):
-        self.assertTupleEqual(Rectangle.make4(Rectangle(0,0,2,2)),
+        self.assertTupleEqual(Rectangle.make4(Rectangle(0, 0, 2, 2)),
                               (Rectangle(0, 0, 1, 1), Rectangle(1, 0, 2, 1),
                                Rectangle(0, 1, 1, 2), Rectangle(1, 1, 2, 2)))
 
@@ -47,6 +47,10 @@ class TestPoint(unittest.TestCase):
 
     def test_intersection(self):
         self.assertEqual(Rectangle(0, 0, 2, 2).intersection(Rectangle(1, 1, 2, 2)), Rectangle(1, 1, 2, 2))
+
+    def test_constructorError(self):
+        with self.assertRaises(ValueError):
+            Rectangle(4, 3, 2, 1)
 
 
 if __name__ == '__main__':
