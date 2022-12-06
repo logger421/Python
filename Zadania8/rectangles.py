@@ -16,6 +16,46 @@ class Rectangle:
         p1, p2 = l
         return Rectangle(p1.x, p1.y, p2.x, p2.y)
 
+    @property
+    def top(self) -> int:
+        return self.pt2.y
+
+    @property
+    def left(self) -> int:
+        return self.pt1.x
+
+    @property
+    def bottom(self) -> int:
+        return self.pt1.y
+
+    @property
+    def right(self) -> int:
+        return self.pt2.x
+
+    @property
+    def width(self) -> int:
+        return self.pt2.x - self.pt1.x
+
+    @property
+    def height(self) -> int:
+        return self.pt2.y - self.pt1.y
+
+    @property
+    def topleft(self) -> Point:
+        return Point(self.pt1.x, self.pt2.y)
+
+    @property
+    def bottomleft(self) -> Point:
+        return self.pt1
+
+    @property
+    def topright(self) -> Point:
+        return self.pt2
+
+    @property
+    def bottomright(self) -> Point:
+        return Point(self.pt2.x, self.pt1.y)
+
     def __str__(self) -> str:  # "[(x1, y1), (x2, y2)]"
         return "[{}, {}]".format(str(self.pt1), str(self.pt2))
 
