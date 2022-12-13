@@ -1,3 +1,4 @@
+#### Wojciech Lotko
 ### Zadania
 OBOWIĄZKOWE DO PRZESŁANIA: jedno zadanie z zestawu
 
