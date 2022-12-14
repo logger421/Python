@@ -86,9 +86,6 @@ class SingleList:
         self.length -= 1
         return tmp
 
-    # Zwraca cały węzeł, skraca listę.
-    # Dla pustej listy rzuca wyjątek ValueError.
-
     def join(self, other):
         if other.is_empty():
             raise ValueError("pusta lista")
@@ -96,30 +93,14 @@ class SingleList:
             self.insert_tail(other.remove_tail())
 
     def clear(self):
-        pass  # czyszczenie listy
+        if self.is_empty():
+            raise ValueError("pusta lista")
+        while not self.is_empty():
+            self.remove_tail()
+
 
 def print_list(l):
+    if l.is_empty():
+        print('List is empty!')
     for item in l:
         print(item)
-
-
-if __name__ == '__main__':
-    alist = SingleList()
-    alist.insert_head(Node(11))  # [11]
-    alist.insert_head(Node(22))  # [22, 11]
-    alist.insert_head(Node(33))  # [33, 22, 11]
-
-    jointList = SingleList()
-    jointList.insert_head(Node(1))
-    jointList.insert_head(Node(2))
-    jointList.insert_head(Node(3))  # [3, 2, 1]
-
-    alist.join(jointList)
-
-    print('first list after join: ')
-    # kolejność 22, 11, 33
-    print_list(alist)
-
-    print('second list after join:')
-    # kolejność 22, 11, 33, 1, 2, 3
-    print_list(jointList)
