@@ -8,6 +8,9 @@ class Node:
     def __str__(self):
         return str(self.data)  # bardzo ogólnie
 
+    def __eq__(self, other):
+        return self.data == other.data
+
 
 class SingleList:
     """Klasa reprezentująca całą listę jednokierunkową."""
@@ -32,6 +35,18 @@ class SingleList:
             raise StopIteration
 
     next = __next__  # kompatybilność Py2 i Py3
+
+    def __eq__(self, other):
+        if self.count() != other.count():
+            return False
+        node1 = self.head
+        node2 = other.head
+        while node1 is not None:
+            if node1 != node2:
+                return False
+            node1 = node1.next
+            node2 = node2.next
+        return True
 
     def is_empty(self):
         # return self.length == 0
@@ -90,7 +105,7 @@ class SingleList:
         if other.is_empty():
             raise ValueError("pusta lista")
         while not other.is_empty():
-            self.insert_tail(other.remove_tail())
+            self.insert_tail(other.remove_head())
 
     def clear(self):
         if self.is_empty():
@@ -104,3 +119,7 @@ def print_list(l):
         print('List is empty!')
     for item in l:
         print(item)
+
+
+if __name__ == '__main__':
+    pass
