@@ -113,6 +113,58 @@ class SingleList:
         while not self.is_empty():
             self.remove_tail()
 
+    # Zadanie 9.2
+    def search(self, data):
+        # klasy O(n)
+        # Zwraca łącze do węzła o podanym kluczu lub None.
+        if self.is_empty():
+            raise ValueError('List is empty')
+
+        node = self.head
+        while node is not None:
+            if node.data == data:
+                return node
+            node = node.next
+        raise ValueError('Element not found')
+
+    def find_min(self):
+        if self.is_empty():
+            raise ValueError('List is empty')
+
+        min_node = current = self.head
+        while current is not None:
+            if current.data < min_node.data:
+                min_node = current
+            else:
+                current = current.next
+        return min_node
+
+    # Zwraca łącze do węzła z najmniejszym kluczem lub None dla pustej listy.
+
+    def find_max(self):
+        if self.is_empty():
+            raise ValueError('List is empty')
+
+        max_node = current = self.head
+        while current is not None:
+            if current.data > max_node.data:
+                max_node = current
+            else:
+                current = current.next
+        return max_node
+
+    # Zwraca łącze do węzła z największym kluczem lub None dla pustej listy.
+
+    def reverse(self):
+        tmp = SingleList()
+        idx, length = 0, self.count()
+        while idx < length:
+            tmp.insert_tail(self.remove_tail())
+            idx = idx + 1
+        self.head = tmp.head
+
+    # Odwracanie kolejności węzłów na liście.
+
 
 def print_list(l):
     if l.is_empty():

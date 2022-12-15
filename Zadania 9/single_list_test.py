@@ -16,11 +16,13 @@ def test_eq():
 
     assert l1 == l2
 
+
 def test_empty_list():
     l = SingleList()
     assert l.is_empty() == True
     l.insert_head(Node(1))
     assert l.is_empty() == False
+
 
 def test_clear_list():
     alist = SingleList()
@@ -30,12 +32,14 @@ def test_clear_list():
     alist.clear()
     assert alist.is_empty() == True
 
+
 def test_count():
     alist = SingleList()
     alist.insert_head(Node(11))  # [11]
     alist.insert_head(Node(22))  # [22, 11]
     alist.insert_head(Node(33))  # [33, 22, 11]
     assert alist.count() == 3
+
 
 def test_insert():
     alist = SingleList()
@@ -49,6 +53,7 @@ def test_insert():
     assert alist.tail == Node(33)
     assert alist.head != alist.tail
 
+
 def test_remove():
     alist = SingleList()
     alist.insert_head(Node(11))
@@ -56,6 +61,7 @@ def test_remove():
     alist.insert_head(Node(33))
     assert alist.remove_head() == Node(33)
     assert alist.remove_tail() == Node(11)
+
 
 def test_join():
     alist = SingleList()
@@ -69,11 +75,50 @@ def test_join():
     join_test.insert_head(Node(3))
 
     alist.join(join_test)
-    assert alist == create_list([33, 22, 11, 3 , 2, 1])
+    assert alist == create_list([33, 22, 11, 3, 2, 1])
     assert join_test.count() == 0
     assert join_test.is_empty() == True
 
 
+def test_fin_min():
+    alist = SingleList()
+    min_val = Node(1)
+    alist.insert_head(min_val)
+    alist.insert_head(Node(2))
+    alist.insert_head(Node(3))
+    alist.insert_head(Node(3))
+    alist.insert_head(Node(8))
+    alist.insert_head(Node(5))
+
+    assert alist.find_min() is min_val
+
+
+def test_fin_max():
+    alist = SingleList()
+    alist.insert_head(Node(1))
+    alist.insert_head(Node(2))
+    alist.insert_head(Node(3))
+    alist.insert_head(Node(3))
+    max_val = Node(8)
+    alist.insert_head(max_val)
+    alist.insert_head(Node(5))
+
+    assert alist.find_max() is max_val
+
+
+def test_search():
+    alist = SingleList()
+    alist.insert_head(Node(1))
+    alist.insert_head(Node(2))
+    data = Node(3)
+    alist.insert_head(data)
+    alist.insert_head(data)
+    alist.insert_head(Node(8))
+    alist.insert_head(Node(5))
+    assert alist.search(3) is data
+
+def test_reverse():
+    pass
 def create_list(l):
     my_list = SingleList()
     for el in l:
