@@ -11,6 +11,9 @@ class Node:
     def __eq__(self, other):
         return self.data == other.data
 
+    def __neg__(self):
+        return not __eq__(self)
+
 
 class SingleList:
     """Klasa reprezentująca całą listę jednokierunkową."""
@@ -47,6 +50,9 @@ class SingleList:
             node1 = node1.next
             node2 = node2.next
         return True
+
+    def __neq__(self):
+        return not __eq__(self)
 
     def is_empty(self):
         # return self.length == 0
@@ -156,14 +162,18 @@ class SingleList:
     # Zwraca łącze do węzła z największym kluczem lub None dla pustej listy.
 
     def reverse(self):
-        tmp = SingleList()
-        idx, length = 0, self.count()
-        while idx < length:
-            tmp.insert_tail(self.remove_tail())
-            idx = idx + 1
-        self.head = tmp.head
-
-    # Odwracanie kolejności węzłów na liście.
+        if self.is_empty():
+            raise ValueError("List is empty")
+        if self.head == self.tail:
+            return
+        prev = None
+        current = self.head
+        while current is not None:
+            next_node = current.next
+            current.next = prev
+            prev = current
+            current = next_node
+        self.head = prev
 
 
 def print_list(l):
@@ -174,4 +184,10 @@ def print_list(l):
 
 
 if __name__ == '__main__':
-    pass
+    alist = SingleList()
+    alist.insert_tail(Node(1))
+    alist.insert_tail(Node(2))
+    alist.insert_tail(Node(3))
+    alist.insert_tail(Node(4))
+    alist.reverse()
+    print_list(alist)

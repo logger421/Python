@@ -91,6 +91,8 @@ def test_fin_min():
     alist.insert_head(Node(5))
 
     assert alist.find_min() is min_val
+    with pytest.raises(ValueError):
+        SingleList().find_min()
 
 
 def test_fin_max():
@@ -104,6 +106,8 @@ def test_fin_max():
     alist.insert_head(Node(5))
 
     assert alist.find_max() is max_val
+    with pytest.raises(ValueError):
+        SingleList().find_max()
 
 
 def test_search():
@@ -116,14 +120,30 @@ def test_search():
     alist.insert_head(Node(8))
     alist.insert_head(Node(5))
     assert alist.search(3) is data
+    with pytest.raises(ValueError):
+        SingleList().search(3)
+
 
 def test_reverse():
-    pass
+    alist = create_list([1, 2, 3, 4])
+    alist.reverse()
+    assert alist == create_list([4, 3, 2, 1])
+    with pytest.raises(ValueError):
+        SingleList().reverse()
+
+
 def create_list(l):
     my_list = SingleList()
     for el in l:
         my_list.insert_tail(Node(el))
     return my_list
+
+
+def print_list(l):
+    if l.is_empty():
+        print('List is empty!')
+    for item in l:
+        print(item)
 
 
 if __name__ == "__main__":
