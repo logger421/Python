@@ -26,5 +26,4 @@ class Stack:
         return data
 
 if __name__ == '__main__':
-    s = Stack()
-    print(s.items)
+    pass
