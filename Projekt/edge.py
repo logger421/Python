@@ -3,6 +3,8 @@ class Edge:
 
 
     def __init__(self, val1, val2):
+        if val1 < 0 or val2 < 0:
+            raise ValueError('Vertices can\'t be negative numbers')
         self.v1 = val1
         self.v2 = val2
 
