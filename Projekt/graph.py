@@ -65,8 +65,42 @@ def print_bfs(instance: Graph, start: int):
                 to_visit.append(vertex)
 
 
-def dfs(g: Graph): pass
+def print_dfs(instance: Graph, start: int):
+    visited = set()
+    instance.sort_lists()
+    def dfs(idx: int, v: set):
+        v.add(idx)
+        print(idx)
+        neighbours = instance.graph[idx]
+        for vertex in neighbours:
+            if not vertex in visited:
+                dfs(vertex, v)
+    dfs(start, visited)
 
 
 if __name__ == '__main__':
-    pass
+    gph = Graph(7)
+    gph.add_edge(Edge(1, 0))
+    gph.add_edge(Edge(1, 2))
+    gph.add_edge(Edge(1, 4))
+
+    gph.add_edge(Edge(0, 1))
+    gph.add_edge(Edge(0, 5))
+    gph.add_edge(Edge(5, 0))
+
+    gph.add_edge(Edge(2, 1))
+    gph.add_edge(Edge(2, 6))
+
+    gph.add_edge(Edge(4, 1))
+    gph.add_edge(Edge(4, 6))
+    gph.add_edge(Edge(4, 3))
+
+    gph.add_edge(Edge(3, 4))
+
+    gph.add_edge(Edge(6, 4))
+    gph.add_edge(Edge(6, 2))
+
+    gph.add_edge(Edge(7, 7))
+    gph.print()
+
+    print_dfs(gph, 1)
