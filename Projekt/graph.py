@@ -49,9 +49,6 @@ class Graph:
             idx += 1
         print()
 
-    def from_file(self, file):
-        pass
-
     def sort_lists(self):
         for sub_list in self.graph:
             if not sub_list is None:

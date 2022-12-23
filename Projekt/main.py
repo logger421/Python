@@ -27,9 +27,8 @@ def view():
     print("Select one of options or type 'q' to exit: ")
     print('-' * 44)
     print('1) Create graph')
-    print('2) Read from file')
-    print('3) Bfs example')
-    print('4) Dfs example')
+    print('2) Bfs example')
+    print('3) Dfs example')
     print('-' * 44)
 
 
@@ -56,14 +55,11 @@ def main():
             gph = g.Graph(n)
             gph = read_edges(gph)
             gph.print()
-
         elif x == 2:
-            pass
-        elif x == 3:
             graph = create_test_graph()
             g.print_bfs(graph, 1)
             del graph
-        elif x == 4:
+        elif x == 3:
             graph = create_test_graph()
             g.print_dfs(graph, 1)
             del graph
