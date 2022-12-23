@@ -6,6 +6,8 @@ class Graph:
     """This class is graph's adjacency list representation"""
 
     def __init__(self, max_vertex_idx):
+        if max_vertex_idx < 0:
+            raise ValueError("Vertex index can't be negative!")
         self.graph = []
         self.max_vertices = max_vertex_idx
         self.create_vertices()
