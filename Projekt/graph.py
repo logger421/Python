@@ -7,12 +7,12 @@ class Graph:
 
     def __init__(self, max_vertex_idx):
         self.graph = []
-        self.max_vertices = max_vertex_idx + 1
+        self.max_vertices = max_vertex_idx
         self.create_vertices()
 
     def create_vertices(self):
         i = 0
-        while i < self.max_vertices:
+        while i <= self.max_vertices:
             self.graph.append(None)
             i += 1
 
@@ -58,49 +58,25 @@ def print_bfs(instance: Graph, start: int):
     while to_visit:
         current = to_visit.popleft()
         neighbours = instance.graph[current]
-        print(current)
+        print(current, end=' ')
         for vertex in neighbours:
             if not vertex in visited:
                 visited.add(vertex)
                 to_visit.append(vertex)
+    print()
 
 
 def print_dfs(instance: Graph, start: int):
     visited = set()
     instance.sort_lists()
+
     def dfs(idx: int, v: set):
         v.add(idx)
-        print(idx)
+        print(idx, end=' ')
         neighbours = instance.graph[idx]
         for vertex in neighbours:
             if not vertex in visited:
                 dfs(vertex, v)
+
     dfs(start, visited)
-
-
-if __name__ == '__main__':
-    gph = Graph(7)
-    gph.add_edge(Edge(1, 0))
-    gph.add_edge(Edge(1, 2))
-    gph.add_edge(Edge(1, 4))
-
-    gph.add_edge(Edge(0, 1))
-    gph.add_edge(Edge(0, 5))
-    gph.add_edge(Edge(5, 0))
-
-    gph.add_edge(Edge(2, 1))
-    gph.add_edge(Edge(2, 6))
-
-    gph.add_edge(Edge(4, 1))
-    gph.add_edge(Edge(4, 6))
-    gph.add_edge(Edge(4, 3))
-
-    gph.add_edge(Edge(3, 4))
-
-    gph.add_edge(Edge(6, 4))
-    gph.add_edge(Edge(6, 2))
-
-    gph.add_edge(Edge(7, 7))
-    gph.print()
-
-    print_dfs(gph, 1)
+    print()
