@@ -37,6 +37,8 @@ class Graph:
         for e in self.graph:
             if e is not None:
                 print('Vertex: {}->{}'.format(idx, [val for val in e]))
+            else:
+                print('Vertex: {}->{}'.format(idx, e))
             idx += 1
         print()
 
