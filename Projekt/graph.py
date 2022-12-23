@@ -19,7 +19,7 @@ class Graph:
             i += 1
 
     def add_edge(self, e: Edge):
-        if e.v1 or e.v2 > self.max_vertices:
+        if (e.v1 or e.v2) > self.max_vertices:
             raise ValueError('Vertex index is out of range')
 
         if self.graph[e.v1] is None:
@@ -54,7 +54,8 @@ class Graph:
 
     def sort_lists(self):
         for sub_list in self.graph:
-            sub_list.sort()
+            if not sub_list is None:
+                sub_list.sort()
 
 
 def print_bfs(instance: Graph, start: int):
