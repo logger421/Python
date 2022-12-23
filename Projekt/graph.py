@@ -19,6 +19,9 @@ class Graph:
             i += 1
 
     def add_edge(self, e: Edge):
+        if e.v1 or e.v2 > self.max_vertices:
+            raise ValueError('Vertex index is out of range')
+
         if self.graph[e.v1] is None:
             self.graph[e.v1] = []
 
@@ -27,10 +30,12 @@ class Graph:
 
     def remove_edge(self, e: Edge):
         if not self.is_in_graph(e):
-            raise ValueError('Given Edge doesn\'t exists')
+            raise ValueError("Given Edge doesn't exists")
         self.graph[e.v1].remove(e.v2)
 
     def is_in_graph(self, e: Edge):
+        if self.graph[e.v1] is None:
+            return False
         return e.v2 in self.graph[e.v1]
 
     def print(self):
