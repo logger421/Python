@@ -51,7 +51,15 @@ def main():
         x = int(param)
         if x == 1:
             print('Insert max vertex index for your graph (remember that indexes start from 0):')
-            n = int(input('> '))
+            # validate that input is integer
+            while True:
+                try:
+                    n = int(input('> '))
+                except ValueError:
+                    print("Please, enter a valid integer")
+                    continue
+                else:
+                    break
             gph = g.Graph(n)
             gph = read_edges(gph)
             gph.print()
