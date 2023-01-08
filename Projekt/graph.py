@@ -54,6 +54,15 @@ class Graph:
             if not sub_list is None:
                 sub_list.sort()
 
+    @staticmethod
+    def load_from_file(file: str):
+        with open(file, 'r') as fs:
+            n = int(fs.readline())
+            g = Graph(n)
+            [g.add_edge(Edge(int(line.split(',')[0].strip()), int(line.split(',')[1].strip()))) for line in
+             fs.readlines()]
+        return g
+
 
 def print_bfs(instance: Graph, start: int):
     instance.sort_lists()
