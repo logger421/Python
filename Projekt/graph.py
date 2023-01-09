@@ -1,3 +1,5 @@
+import sys
+
 from edge import Edge
 from collections import deque
 
@@ -56,12 +58,16 @@ class Graph:
 
     @staticmethod
     def load_from_file(file: str):
-        with open(file, 'r') as fs:
-            n = int(fs.readline())
-            g = Graph(n)
-            [g.add_edge(Edge(int(line.split(',')[0].strip()), int(line.split(',')[1].strip()))) for line in
-             fs.readlines()]
-        return g
+        try:
+            with open(file, 'r') as fs:
+                n = int(fs.readline())
+                g = Graph(n)
+                [g.add_edge(Edge(int(line.split(',')[0].strip()), int(line.split(',')[1].strip()))) for line in
+                 fs.readlines()]
+            return g
+        except FileNotFoundError:
+            print('No such file')
+            sys.exit()
 
 
 def print_bfs(instance: Graph, start: int):
