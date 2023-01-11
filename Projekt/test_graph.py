@@ -66,13 +66,5 @@ def test_sort_lists():
     assert gph.graph[3] is None
 
 
-def test_bfs():
-    pass
-
-
-def test_dfs():
-    pass
-
-
 if __name__ == '__main__':
     pytest.main()
