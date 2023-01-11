@@ -102,10 +102,15 @@ def read_edges(gph: g.Graph):
     print('Enter pair of integers (space separated):')
     vertices = None
     while True:
-        vertices = input('> ')
-        if vertices == 'q': break
-        vertices = tuple([int(edge) for edge in vertices.split(' ')])
-        gph.add_edge(Edge(*vertices))
+        try:
+            vertices = input('> ')
+            if vertices == 'q': break
+            vertices = tuple([int(edge) for edge in vertices.split(' ')])
+            gph.add_edge(Edge(*vertices))
+        except ValueError:
+            print('Vertex index is greater then declared max vertex index in graph')
+        else:
+            continue
     return gph
 
 

@@ -21,7 +21,7 @@ class Graph:
             i += 1
 
     def add_edge(self, e: Edge):
-        if (e.v1 or e.v2) > self.max_vertices:
+        if (e.v1 > self.max_vertices) or (e.v2 > self.max_vertices) :
             raise ValueError('Vertex index is out of range')
 
         if self.graph[e.v1] is None:
