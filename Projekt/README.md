@@ -20,9 +20,11 @@ Wierzchołki są liczbami int od 0 do n-1. Zaimplementować BFS i DFS.
 
 ```
 # Zakładając, że znajdujemy się w katalogu głównym projektu (obecne repo ./Projekt)
- > pytest test_edge.py
+ > python test_edge.py
+ > python test_graph.py
 # lub
- > pytest test_graph.py
+  > python3 test_edge.py
+  > python3 test_graph.py
 ```
 
 #### Folder projektu zawiera w sobie dwie klasy:
