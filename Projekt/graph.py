@@ -98,6 +98,7 @@ class Graph:
 
 
 def print_bfs(instance: Graph, start: int, log: bool = False):
+    """Use log parameter if you want to return BFS list representation"""
     instance.sort_lists()
     to_visit = deque()
     visited = set()
@@ -108,24 +109,24 @@ def print_bfs(instance: Graph, start: int, log: bool = False):
         current = to_visit.popleft()
         result.append(current)
         neighbours = instance.graph[current]
-        print(current, end=' ')
+        if not log: print(current, end=' ')
         for vertex in neighbours:
             if not vertex in visited:
                 visited.add(vertex)
                 to_visit.append(vertex)
-    print()
     if log:
         return result
 
 
 def print_dfs(instance: Graph, start: int, log: bool = False):
+    """Use log parameter if you want to return DFS list representation"""
     visited = set()
     instance.sort_lists()
     result = list()
 
     def dfs(idx: int, v: set, res: list):
         v.add(idx)
-        print(idx, end=' ')
+        if not log: print(idx, end=' ')
         res.append(idx)
         neighbours = instance.graph[idx]
         for vertex in neighbours:
@@ -133,6 +134,5 @@ def print_dfs(instance: Graph, start: int, log: bool = False):
                 dfs(vertex, v, res)
 
     dfs(start, visited, result)
-    print()
     if log:
         return result

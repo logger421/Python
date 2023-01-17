@@ -66,5 +66,16 @@ def test_sort_lists():
     assert gph.graph[3] is None
 
 
+def test_bfs():
+    gph = g.Graph.load_from_file('demo.txt')
+    result = g.print_bfs(gph, 1, True)
+    assert result == [1, 0, 2, 4, 5, 6, 3]
+
+def test_dfs():
+    gph = g.Graph.load_from_file('demo.txt')
+    result = g.print_dfs(gph, 1, True)
+    assert result == [1, 0, 5, 2, 6, 4, 3]
+
+
 if __name__ == '__main__':
     pytest.main()

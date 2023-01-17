@@ -56,8 +56,10 @@ def sub_case(param, instance: g.Graph):
     param = int(param)
     if param == 1:
         g.print_bfs(instance, 1)
+        print()
     elif param == 2:
         g.print_dfs(instance, 1)
+        print()
     elif param == 3:
         instance.print()
     elif param == 4:
@@ -97,10 +99,12 @@ def main_case(param):
     elif x == 2:
         graph = create_test_graph()
         g.print_bfs(graph, 1)
+        print()
         del graph
     elif x == 3:
         graph = create_test_graph()
         g.print_dfs(graph, 1)
+        print()
         del graph
     elif x == 4:
         print('Insert file name to load graph')
