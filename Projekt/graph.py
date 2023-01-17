@@ -1,3 +1,4 @@
+import os
 import sys
 
 from edge import Edge
@@ -92,6 +93,8 @@ class Graph:
                 if e is not None:
                     [fs.write('{} {}\n'.format(idx, val)) for val in e]
                 idx += 1
+            fs.flush()
+            os.fsync(fs.fileno())
 
 
 def print_bfs(instance: Graph, start: int, log: bool = False):
