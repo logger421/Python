@@ -90,15 +90,16 @@ class Graph:
                 idx += 1
 
 
-def print_bfs(instance: Graph, start: int):
+def print_bfs(instance: Graph, start: int, log: bool = False):
     instance.sort_lists()
     to_visit = deque()
     visited = set()
     visited.add(start)
     to_visit.append(start)
-
+    result = list()
     while to_visit:
         current = to_visit.popleft()
+        result.append(current)
         neighbours = instance.graph[current]
         print(current, end=' ')
         for vertex in neighbours:
@@ -106,19 +107,25 @@ def print_bfs(instance: Graph, start: int):
                 visited.add(vertex)
                 to_visit.append(vertex)
     print()
+    if log:
+        return result
 
 
-def print_dfs(instance: Graph, start: int):
+def print_dfs(instance: Graph, start: int, log: bool = False):
     visited = set()
     instance.sort_lists()
+    result = list()
 
-    def dfs(idx: int, v: set):
+    def dfs(idx: int, v: set, res: list):
         v.add(idx)
         print(idx, end=' ')
+        res.append(idx)
         neighbours = instance.graph[idx]
         for vertex in neighbours:
             if not vertex in visited:
-                dfs(vertex, v)
+                dfs(vertex, v, res)
 
-    dfs(start, visited)
+    dfs(start, visited, result)
     print()
+    if log:
+        return result
