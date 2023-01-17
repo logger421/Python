@@ -81,11 +81,12 @@ użycia klasy `graph.py`.
 
 Po uruchomieniu dostaniemy opcje wyboru z czterech dostępnych w menu:
 
-1) Utworzenie grafu - użytkownik zostanie poproszony o podanie maksymalnego indeksu wierzchołka w grafie, oraz określić
-   za pomocą `True/False` czy graf będzie skierowany czy nieskierowany. Nastęnie będzie musiał wprowadzić wszystkie
-   krawędzie swojego grafu w formie: `v1 v2` `Enter`, po wprowadzeniu wszystkich `q` aby zakończyć. Następnie graf
-   zostanie wypisany na ekran
-2) Wypisanie algorytmu `BFS` na stworzonym już grafie
-3) Wypisanie algorytmu `DFS` na stworzonym już grafie
+1) Utworzenie grafu - użytkownik zostanie poproszony o podanie maksymalnego indeksu wierzchołka w grafie, oraz musi
+   określić
+   za pomocą `True/False` czy graf będzie skierowany/nieskierowany. Następnie będzie musiał wprowadzić wszystkie
+   krawędzie swojego grafu w formie: `v1 v2` `Enter`, po wprowadzeniu wszystkich należy wcisnąć `q` aby zakończyć
+   wprowadzanie. Następnie program przejdzie do pod menu wypisując dostępne operacje dla stworzonego grafu.
+2) Wypisanie algorytmu `BFS` na testowym grafie wczytanym z pliku `demo.txt`.
+3) Wypisanie algorytmu `DFS` na testowym grafie wczytanym z pliku `demo.txt`.
 4) Wczytanie grafu z pliku. Plik musi być w formacie jak załączony plik `demo.txt`. Pierwsza wartość w pliku oznacza
-   maksymalny wierzchołek w grafie.
+   maksymalny wierzchołek w grafie, druga jest to zmienna bool mówiąca czy graf będzie skierowany/nieskierowany.
