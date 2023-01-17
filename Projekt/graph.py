@@ -8,7 +8,7 @@ from collections import deque
 class Graph:
     """This class is graph's adjacency list representation"""
 
-    def __init__(self, max_vertex_idx, directed=True):
+    def __init__(self, max_vertex_idx:int, directed:bool=True):
         if max_vertex_idx < 0:
             raise ValueError("Vertex index can't be negative!")
         self.directed = directed
