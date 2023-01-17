@@ -7,9 +7,10 @@ from collections import deque
 class Graph:
     """This class is graph's adjacency list representation"""
 
-    def __init__(self, max_vertex_idx):
+    def __init__(self, max_vertex_idx, directed=True):
         if max_vertex_idx < 0:
             raise ValueError("Vertex index can't be negative!")
+        self.directed = directed
         self.graph = []
         self.max_vertices = max_vertex_idx
         self.create_vertices()
@@ -21,7 +22,7 @@ class Graph:
             i += 1
 
     def add_edge(self, e: Edge):
-        if (e.v1 > self.max_vertices) or (e.v2 > self.max_vertices) :
+        if (e.v1 > self.max_vertices) or (e.v2 > self.max_vertices):
             raise ValueError('Vertex index is out of range')
 
         if self.graph[e.v1] is None:
@@ -30,10 +31,19 @@ class Graph:
         if not self.is_in_graph(e):
             self.graph[e.v1].append(e.v2)
 
+        if not self.directed:
+            if self.graph[e.v2] is None:
+                self.graph[e.v2] = []
+
+            if not self.is_in_graph(e):
+                self.graph[e.v2].append(e.v1)
+
     def remove_edge(self, e: Edge):
         if not self.is_in_graph(e):
             raise ValueError("Given Edge doesn't exists")
         self.graph[e.v1].remove(e.v2)
+        if not self.directed:
+            self.graph[e.v2].remove(e.v1)
 
     def is_in_graph(self, e: Edge):
         if self.graph[e.v1] is None:
@@ -62,12 +72,22 @@ class Graph:
             with open(file, 'r') as fs:
                 n = int(fs.readline())
                 g = Graph(n)
-                [g.add_edge(Edge(int(line.split(',')[0].strip()), int(line.split(',')[1].strip()))) for line in
+                [g.add_edge(Edge(int(line.split(' ')[0].strip()), int(line.split(' ')[1].strip()))) for line in
                  fs.readlines()]
             return g
         except FileNotFoundError:
             print('No such file')
             sys.exit()
+
+    @staticmethod
+    def save_to_file(g, file: str):
+        with open(file, 'w') as fs:
+            fs.write('{}\n'.format(g.max_vertices))
+            idx = 0
+            for e in g.graph:
+                if e is not None:
+                    [fs.write('{} {}\n'.format(idx, val)) for val in e]
+                idx += 1
 
 
 def print_bfs(instance: Graph, start: int):
