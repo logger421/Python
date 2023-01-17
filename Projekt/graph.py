@@ -48,6 +48,8 @@ class Graph:
     def is_in_graph(self, e: Edge):
         if self.graph[e.v1] is None:
             return False
+        if not self.directed:
+            return e.v2 in self.graph[e.v1] and e.v1 in self.graph[e.v2]
         return e.v2 in self.graph[e.v1]
 
     def print(self):
