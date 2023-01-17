@@ -73,7 +73,8 @@ class Graph:
         try:
             with open(file, 'r') as fs:
                 n = int(fs.readline())
-                g = Graph(n)
+                is_directed = eval(fs.readline())
+                g = Graph(n, is_directed)
                 [g.add_edge(Edge(int(line.split(' ')[0].strip()), int(line.split(' ')[1].strip()))) for line in
                  fs.readlines()]
             return g
@@ -85,6 +86,7 @@ class Graph:
     def save_to_file(g, file: str):
         with open(file, 'w') as fs:
             fs.write('{}\n'.format(g.max_vertices))
+            fs.write('{}\n'.format(g.directed))
             idx = 0
             for e in g.graph:
                 if e is not None:
